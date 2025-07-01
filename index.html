@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>EnglishFun</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="brand">
+    <span class="s1">English</span><span>Fun</span>
+  </header>
+  <div class="left">
+    <h1>Aprenda inglês de um jeito fácil e divertido.</h1>
+    <p>Escolha o seu caminho e comece agora sua jornada rumo à fluência.</p>
+    <div style="display: flex; flex-wrap: wrap;">
+      <div class="select">
+        <option value="english">&nbsp&nbsp&nbspFaça seu login com o Google</option> 
+      </div>
+      <button onclick="loginGoogle()">&nbsp&nbspAcessar&nbsp&nbsp</button>
+    </div>
+  </div>
+
+  <div class="right">
+    <img src="../imgs/globo.png" >
+  </div>
+  
+<!-- Firebase SDK compatível -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script> 
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script> 
+
+  <script>
+    // Configuração do Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBNsC6LDZCp_3HS0UDiiUXLFEwfRw_D2vk",
+      authDomain: "login-site-162c3.firebaseapp.com",
+      projectId: "login-site-162c3",
+      storageBucket: "login-site-162c3.appspot.com",
+      messagingSenderId: "651910631588",
+      appId: "1:651910631588:web:7996b76d54ce05eb865631",
+      measurementId: "G-D9TDQPJ048"
+    };
+
+    // Inicializa o Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Login com Google
+    function loginGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+      .then(result => {
+      window.location.href = "../pages/page2.html";
+      })
+      .catch(error => {
+      alert("Erro ao fazer login: " + error.message);
+      });
+    }
+
+    // Logout
+    function logout() {
+      auth.signOut().then(() => {
+      document.getElementById("user-info").innerHTML = "";
+      document.getElementById("status").innerText = "Você saiu!";
+      });
+    }
+
+
+  </script>
+</body>
+</html>
